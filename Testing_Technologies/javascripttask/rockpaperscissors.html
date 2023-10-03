@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors Game</title>
+    <style>
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock, Paper, Scissors Game</h1>
+    <p>Click on one of the options below:</p>
+
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <div id="result"></div>
+
+    <script>
+      const choices = ["rock", "paper", "scissors"];
+
+      function computerChoice() {
+        const randomIndex = Math.floor(Math.random() * choices.length);
+        return choices[randomIndex];
+      }
+
+      function determineWinner(playerChoice, computerChoice) {
+        if (playerChoice === computerChoice) {
+          return "It's a tie!";
+        } else if (
+          (playerChoice === "rock" && computerChoice === "scissors") ||
+          (playerChoice === "paper" && computerChoice === "rock") ||
+          (playerChoice === "scissors" && computerChoice === "paper")
+        ) {
+          return "You win!";
+        } else {
+          return "Computer wins!";
+        }
+      }
+
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const playerChoice = button.id;
+          const computer = computerChoice();
+          const result = determineWinner(playerChoice, computer);
+          document.getElementById(
+            "result"
+          ).textContent = `You chose ${playerChoice}. Computer chose ${computer}. ${result}`;
+        });
+      });
+    </script>
+  </body>
+</html>
